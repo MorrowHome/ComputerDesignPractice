@@ -1,6 +1,6 @@
 &emsp;&emsp;（1）从首页的课程材料下载链接，下载数据通路表和控制信号取值表的模板，并根据指令集和上课的实验室，下载对应的Vivado模板工程，如图12-1所示；
 
-<center><img src = "assets/1-1.png" width = 350></center>
+<center><img src = "../assets/lab1/1-1.png" width = 350></center>
 <center>图12-1 根据实际情况，选择其中一个demo工程</center>
 
 &emsp;&emsp;（2）结合数据通路表和控制信号表示例，运行仿真，熟悉模板工程和示例代码；

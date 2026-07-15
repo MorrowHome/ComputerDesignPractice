@@ -107,7 +107,7 @@ cd ~ && git clone https://gitee.com/hitsz-cslab/cdp-tests.git
 
 &emsp;&emsp;<u>**Trace测试框架会根据SoC是否支持AXI总线，自动进行相应架构的测试**</u>，如下图所示：
 
-<center><img src = "assets/trace-1.png" width = 100%></center>
+<center><img src = "../assets/trace/trace-1.png" width = 100%></center>
 
 &emsp;&emsp;Basic Trace只会测试CPU内核，而AXI Trace会将CPU连同ICache、DCache和总线一起测试。
 
@@ -212,7 +212,7 @@ cd cdp-tests
 
 &emsp;&emsp;然后继续在终端执行`make`命令，从而编译代码，生成可执行的仿真模型。
 
-![image-20210704012833242](assets/trace-2.png)
+![image-20210704012833242](../assets/trace/trace-2.png)
 
 ### 4.1 运行单个测试
 
@@ -230,13 +230,13 @@ ls bin
 make run TEST=sltu
 ```
 
-![image-20210704013056368](assets/trace-3.png)
+![image-20210704013056368](../assets/trace/trace-3.png)
 
 &emsp;&emsp;打印出Test Point Pass之后，就代表这条指令测试通过了。
 
 &emsp;&emsp;如果发生了错误，就会打印如下所示的信息：
 
-![image-20210704013210584](assets/trace-4.png)
+![image-20210704013210584](../assets/trace/trace-4.png)
 
 &emsp;&emsp;左栏为参照的正确实现，右栏为你实现的CPU给出的信号，通过比对这两组信号，你可以很快地确定错误发生在哪一条指令执行过程中，然后通过反汇编和波形的形式进行调试。
 
@@ -246,15 +246,15 @@ make run TEST=sltu
 
 &emsp;&emsp;打开桌面上的Surfer工具，然后直接把`waveform`文件夹下的.vcd波形文件拖拽到Surfer，如下图所示。
 
-<center><img src = "assets/trace-5.png" width = 600></center>
+<center><img src = "../assets/trace/trace-5.png" width = 600></center>
 
 &emsp;&emsp;然后把`cdp-tests`目录下的.surf.ron格式的波形配置文件拖拽到Surfer，如下图所示。
 
-<center><img src = "assets/trace-6.png" width = 100%></center>
+<center><img src = "../assets/trace/trace-6.png" width = 100%></center>
 
 &emsp;&emsp;修改HDL代码并重新编译、重新运行测试后，只需点击左上角工具栏的刷新按钮，即可查看最新的波形，如下图所示。
 
-<center><img src = "assets/trace-7.png" width = 350></center>
+<center><img src = "../assets/trace/trace-7.png" width = 350></center>
 
 &emsp;&emsp;更多Surfer工具的使用方法，请查看<a href="surfer.md" target=_blank>附录D. Surfer使用指南</a>。
 
@@ -262,7 +262,7 @@ make run TEST=sltu
 
 &emsp;&emsp;反汇编文件在`asm`文件夹下。在上述的`auipc`的测试例子中，可见在PC等于0x8处出现了错误，写回值有误。通过查看和分析`auipc.dump`中的反汇编指令，可以帮助我们找到出错的指令。
 
-<center><img src = "assets/trace-8.png" width = 600></center>
+<center><img src = "../assets/trace/trace-8.png" width = 600></center>
 
 &emsp;&emsp;请根据出错点，结合波形和反汇编代码，完成调试。
 
@@ -280,11 +280,11 @@ python3 run_all_tests.py
 
 &emsp;&emsp;通过Basic Trace测试的示意图：
 
-<center><img src = "assets/trace-9.png" width = 100%></center>
+<center><img src = "../assets/trace/trace-9.png" width = 100%></center>
 
 &emsp;&emsp;通过AXI Trace测试的示意图：
 
-<center><img src = "assets/trace-10.png" width = 100%></center>
+<center><img src = "../assets/trace/trace-10.png" width = 100%></center>
 
 
 <!-- **（2）使用start测试程序自动测试**
@@ -300,10 +300,10 @@ make run TEST=start
 
 &emsp;&emsp;如果你的mycpu能够支持37条指令（24条必做和13条选做），则会显示“Test Point Pass!”。
 
-<center><img src = "assets/trace-11.png" width = 300></center>
+<center><img src = "../assets/trace/trace-11.png" width = 300></center>
 
 &emsp;&emsp;如果测试显示“[difftest] Test Failed!”，说明没有通过37条指令测试。Digiti的数值则表示你的mycpu通过的功能点数，其高8位为0x25，表示共有37个测试点，低8位表示通过的测试点数。
 
-<center><img src = "assets/trace-12.png" width = 380></center>
+<center><img src = "../assets/trace/trace-12.png" width = 380></center>
 
 &emsp;&emsp;例如，上图所示的测试结果表面，该CPU通过了0x18，即24条指令的测试。 -->

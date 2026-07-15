@@ -17,17 +17,17 @@
 
 &emsp;&emsp;推荐使用VirtualBox。下载完毕后，请在Virtualbox中导入：管理->导入虚拟电脑，选择对应OVF文件。
 
-![image-20210704155051556](assets/vm-1.png)
+![image-20210704155051556](../assets/trace/vm-1.png)
 
 ## 3. 配置虚拟网卡
 
 &emsp;&emsp;VirtualBox中对于虚拟网卡，需要稍微配置一下才可以使用，具体的配置如下：
 
-<center><img src = "assets/vm-2.png" width = 550></center>
+<center><img src = "../assets/trace/vm-2.png" width = 550></center>
 
-<center><img src = "assets/vm-3.png" width = 700></center>
+<center><img src = "../assets/trace/vm-3.png" width = 700></center>
 
-<center><img src = "assets/vm-4.png" width = 700></center>
+<center><img src = "../assets/trace/vm-4.png" width = 700></center>
 
 ## 4. 使用MobaXTerm
 
@@ -37,8 +37,8 @@
 
 &emsp;&emsp;在弹出窗口中，点击”SSH“，按如下内容填写（“远程主机”地址需要自己查询）。填写完毕后，点击“好 的”。输入虚拟机密码123456。
 
-![image-20210704155500960](assets/vm-5.png)
+![image-20210704155500960](../assets/trace/vm-5.png)
 
 &emsp;&emsp;连接完毕之后，虚拟机可最小化到后台，在命令行中进行操作。左侧可以与虚拟机的文件交互（上传、 下载），右侧可以输入命令。
 
-![image-20210704155702840](assets/vm-6.png)
+![image-20210704155702840](../assets/trace/vm-6.png)

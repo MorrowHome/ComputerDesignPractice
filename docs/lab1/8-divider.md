@@ -1,7 +1,7 @@
 !!! tip "除法器实现"
     &emsp;&emsp;除法器的接口信号及时序与乘法器相同，此处不再赘述。
 
-    &emsp;&emsp;点击下载并解压<a href="assets/div_test.zip" target=_blank>div_test.zip</a>。先在`div_test`工程中实现除法器。通过仿真测试后，再把除法器模块集成到单周期CPU工程当中。
+    &emsp;&emsp;点击下载并解压<a href="../assets/lab1/div_test.zip" target=_blank>div_test.zip</a>。先在`div_test`工程中实现除法器。通过仿真测试后，再把除法器模块集成到单周期CPU工程当中。
 
 &emsp;&emsp;此处介绍原码除法器的设计。原码除法器的被除数、除数、商和余数均采用原码表示。
 
@@ -35,11 +35,11 @@ $$
     &emsp;&emsp;设被除数 $x$ = +`1101B`，除数 $y$ = -`0110B`；$x$ 的绝对值 $x^*$ = `01101B`，$y$ 的绝对值 $y^*$ = `00110B`，$y^*$ 的补码 $[-y^*]_补$ = `11010B`，则有：
 
     === "原始的恢复余数法"
-        <center><img src="assets/8-1a.png" width = 440></center>
+        <center><img src="../assets/lab1/8-1a.png" width = 440></center>
         <center>图8-1 恢复余数法示例</center>
 
     === "简化的恢复余数法"
-        <center><img src="assets/8-1b.png" width = 442></center>
+        <center><img src="../assets/lab1/8-1b.png" width = 442></center>
         <center>图8-1 恢复余数法示例</center>
 
     &emsp;&emsp;注意，在本例子中，$x$ 和 $y$ 的数据位宽均为4位（最高位的符号位不算入内），故左移次数应是4。  
@@ -60,11 +60,11 @@ $$
     &emsp;&emsp;设被除数 $x$ = +`1101B`，除数 $y$ = -`0110B`；$x$ 的绝对值 $x^*$ = `01101B`，$y$ 的绝对值 $y^*$ = `00110B`，$y^*$ 的补码 $[-y^*]_补$ = `11010B`，则有：
 
     === "原始的加减交替法"
-        <center><img src="assets/8-2a.png" width = 440></center>
+        <center><img src="../assets/lab1/8-2a.png" width = 440></center>
         <center>图8-2 加减交替法示例</center>
 
     === "简化的加减交替法"
-        <center><img src="assets/8-2b.png" width = 442></center>
+        <center><img src="../assets/lab1/8-2b.png" width = 442></center>
         <center>图8-2 加减交替法示例</center>
 
     &emsp;&emsp;同样地，$x$ 和 $y$ 的数据位宽均为4位，故原本需左移4次。  
@@ -90,7 +90,7 @@ $$
 
 &emsp;&emsp;此处给出原码除法器的参考实现架构，如图8-3所示。
 
-<center><img src="assets/8-3.png" width = 300></center>
+<center><img src="../assets/lab1/8-3.png" width = 300></center>
 <center>图8-3 原码除法器参考架构</center>
 
 &emsp;&emsp;在图8-3中，深蓝色箭头表示数据，深橙色箭头则表示控制信号。

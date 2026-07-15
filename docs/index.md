@@ -98,7 +98,7 @@
 
 - ^^各班人数均接近实验室最大容量^^，**非必要请勿换班上课！自习的请自觉在其他班上课前离开！** 否则座位可能不够！
 
-<center><img src = "time_tbl.png" width = 100%></center>
+<center><img src = "assets/time_tbl.png" width = 100%></center>
 
 
 

@@ -8,7 +8,7 @@
 
 &emsp;:star: **禁止随意拔出** 开发板上的 **跳线帽**！
 
-<center><img src = "assets/b-1.png" width = 100%></center>
+<center><img src = "../assets/home/b-1.png" width = 100%></center>
 <center>图1 装袋后，^^把袋口折起来^^</center>
 
 &emsp;:star: **禁止丢弃防静电袋！** 使用完毕时，**将开发板正确装入防静电袋**（如有），如图1所示。
@@ -19,7 +19,7 @@
 
 <!-- &emsp;:star::star: 将开发板放回大纸箱时，不管有无防静电袋，都应当 **将有拨码开关的一边朝下，竖立放置**，如图5所示。 -->
 
-<!-- <center><img src = "assets/b-5.png" width = 350></center>
+<!-- <center><img src = "../assets/home/b-5.png" width = 350></center>
 <center>图5 开发板放置时，拨码开关一侧朝下，竖立放置</center> -->
 
 
@@ -39,7 +39,7 @@
 
     &emsp;&emsp;使用USB-TypeC线连接JTAG接口，打开电源开关即可使用。==<font color = red>**插拔线材时，禁止使用蛮力**</font>==。
 
-    <center><img src = "assets/b-2.jpg" width = 100%></center>
+    <center><img src = "../assets/home/b-2.jpg" width = 100%></center>
     <center>图2 EGO1开发板实物图</center>
 
     &emsp;&emsp;**【时钟】**：100MHz晶振时钟，连接到FPGA的`P17`引脚。
@@ -54,9 +54,9 @@
 
     &emsp;&emsp;**【LED】**：16位LED，^^高电平点亮^^。
 
-    &emsp;&emsp;上述基本外设对应的引脚约束文件：<a href="assets/ego1_pin.xdc" target=_blank>ego1_pin.xdc</a>。
+    &emsp;&emsp;上述基本外设对应的引脚约束文件：<a href="../assets/home/ego1_pin.xdc" target=_blank>ego1_pin.xdc</a>。
 
-    &emsp;&emsp;更多关于EGO1开发板的信息，请参考《<a href="assets/EGO1开发板用户手册.pdf" target=_blank>EGO1开发板用户手册</a>》。
+    &emsp;&emsp;更多关于EGO1开发板的信息，请参考《<a href="../assets/home/EGO1开发板用户手册.pdf" target=_blank>EGO1开发板用户手册</a>》。
 
 === "Minisys使用说明"
 
@@ -66,7 +66,7 @@
 
     &emsp;&emsp;Minisys有2个版本，其中一个版本的 ^^JTAG接口在电源开关旁边^^，请注意甄别。
 
-    <center><img src = "assets/b-3.jpg" width = 100%></center>
+    <center><img src = "../assets/home/b-3.jpg" width = 100%></center>
     <center>图3 Minisys开发板实物图</center>
 
     &emsp;&emsp;**【时钟】**：100MHz晶振时钟，连接到FPGA的`Y18`引脚。
@@ -81,8 +81,8 @@
 
     &emsp;&emsp;**【LED】**：24位LED，^^高电平点亮^^。
 
-    &emsp;&emsp;上述基本外设对应的引脚约束文件：<a href="assets/minisys_pin.xdc" target=_blank>minisys_pin.xdc</a>。
+    &emsp;&emsp;上述基本外设对应的引脚约束文件：<a href="../assets/home/minisys_pin.xdc" target=_blank>minisys_pin.xdc</a>。
 
-    &emsp;&emsp;更多关于Minisys开发板的信息，请参考《<a href="assets/Minisys开发板用户手册.pdf" target=_blank>Minisys开发板用户手册</a>》。
+    &emsp;&emsp;更多关于Minisys开发板的信息，请参考《<a href="../assets/home/Minisys开发板用户手册.pdf" target=_blank>Minisys开发板用户手册</a>》。
 
 

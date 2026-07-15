@@ -2,7 +2,7 @@
 
 &emsp;&emsp;数据通路的主要功能部件包括时钟模块、程序计数器 (Program Counter, PC)、指令存储器 (Instruction ROM, IROM)、数据存储器 (Data RAM, DRAM)、寄存器文件 (Register File, RF)和算术逻辑运算单元 (Arithmetic and Logic Unit, ALU)，如图3-1所示。
 
-<center><img src = "assets/3-1.png" width = 450></center>
+<center><img src = "../assets/lab1/3-1.png" width = 450></center>
 <center>图3-1 miniRV数据通路简图</center>
 
 &emsp;&emsp;数据通路具体包含哪些功能部件取决于设计者，就像同一个数字逻辑实验可以有很多种模块划分方案。下面以表3-1所示的模块划分方案为例来说明数据通路的基本功能部件。
@@ -40,12 +40,12 @@
 !!! info "时钟IP核的创建方式"
     &emsp;&emsp;在Vivado中，依次点击`IP Catalog`->`FPGA Features and Design`->`Clocking`，并双击`Clocking Wizard`即可创建时钟IP核，如图3-2所示。其他IP核均可通过同样的方式创建，下文不再赘述。
 
-    <center><img src = "assets/3-2.png"></center>
+    <center><img src = "../assets/lab1/3-2.png"></center>
     <center>图3-2 打开`Clocking Wizard` IP核</center>
 
 &emsp;&emsp;时钟IP核默认输出50MHz的时钟来驱动CPU运行。**如果需要调节频率，可双击IP核打开配置窗口，点击切换到“Output Clocks”标签页，改变`clk_out1`的输出频率**，如图3-3所示。
 
-<center><img src = "assets/3-3.png" width = 100%></center>
+<center><img src = "../assets/lab1/3-3.png" width = 100%></center>
 <center>图3-3 设置时钟IP核的输出频率</center>
 
 &emsp;&emsp;修改IP核设置后，点击OK按钮。在随后弹出的对话框中，点击“Generate”按钮即可。
@@ -69,7 +69,7 @@
 ```
 &emsp;&emsp;时钟IP核需要一定的时间进行初始化操作。初始化完成之前，输出的时钟信号是不稳定的，如图3-4所示。因此，一般需要使用`locked`参与生成CPU的时钟信号和复位信号，见上述代码的第23行、第25行。
 
-<center><img src = "assets/3-4.png" width = 100%></center>
+<center><img src = "../assets/lab1/3-4.png" width = 100%></center>
 <center>图3-4 时钟IP核的初始化波形</center>
 
 
@@ -84,7 +84,7 @@
 
 &emsp;&emsp;对于条件分支指令或直接跳转指令，CPU需要通过计算，才能得出下一条指令的PC值。因此，实现时，需要根据指令类型判断PC值如何更新，如图3-5所示。
 
-<center><img src = "assets/3-5.png" width = 500></center>
+<center><img src = "../assets/lab1/3-5.png" width = 500></center>
 <center>图3-5 PC原理图</center>
 
 &emsp;&emsp;在图3-5中，PC的值被当作地址输出到指令存储器。指令存储器返回指令后，由译码单元对指令进行译码，得到运算所需的源数据，并由立即数得到偏移量`offset`。执行单元根据数据的运算结果，产生跳转标志位信号`br`。当`br`为0时，PC的新值等于其旧值加4；当`br`为1时，PC的新值则等于PC的旧值加上跳转的偏移量`offset`。一般地，可将产生PC新值的相关逻辑封装起来，即为demo工程的NPC模块。
@@ -97,7 +97,7 @@
 
 &emsp;&emsp;Block Memory IP核的读写时序如图3-6所示。读时序的基本规律是当前时钟发出读地址，下一个时钟即可获取读数据。写时序则是在同一个时钟上升沿发出写地址、写使能和写数据即可。
 
-<center><img src = "assets/3-6.png" width = 450></center>
+<center><img src = "../assets/lab1/3-6.png" width = 450></center>
 <center>图3-6 Block Memory的读写时序</center>
 
 &emsp;&emsp;指令存储器和数据存储器的每个存储单元都是32位大小，且数据存储器的写使能信号为4bit，支持字节、半字的写操作。
@@ -106,7 +106,7 @@
 
 &emsp;&emsp;在Vivado中，我们可以在IP核的配置窗口修改Block Memory IP核的容量。双击实例化好的IP核，即可打开Block Memory IP核的配置窗口。点击"Port A Options"，即可设置数据深度和数据宽度，如图3-7所示。
 
-<center><img src = "assets/3-7.png" width = 100%></center>
+<center><img src = "../assets/lab1/3-7.png" width = 100%></center>
 <center>图3-7 修改Block Memory IP核的容量参数</center>
 
 &emsp;&emsp;demo工程默认配置指令存储器的大小是12800 × 32bit = 50KB。除非后续需要运行LLAMA2推理程序，否则不需要修改其容量。
@@ -145,7 +145,7 @@ af810c04
 
 &emsp;&emsp;在Vivado中双击创建好的Block Memory IP核，在设置窗口中点击进入`Other Options`标签页，导入`.coe`文件，如图3-8所示。
 
-<center><img src = "assets/3-8.png"></center>
+<center><img src = "../assets/lab1/3-8.png"></center>
 <center>图3-8 导入.coe文件以初始化Block Memory IP核</center>
 
 
@@ -156,7 +156,7 @@ af810c04
 
 &emsp;&emsp;由指令格式易知，一条指令最多需要访问3个寄存器，这决定了寄存器堆必须具有3个端口 —— 2个读端口 (对应`rs1`和`rs2`)和1个写端口 (对应`rd`)，如图3-9所示。
 
-<center><img src = "assets/3-9.png" width = 160></center>
+<center><img src = "../assets/lab1/3-9.png" width = 160></center>
 <center>图3-9 寄存器堆模块图</center>
 
 &emsp;&emsp;一般地，寄存器读取数据采用组合逻辑，而写数据采用时序逻辑。

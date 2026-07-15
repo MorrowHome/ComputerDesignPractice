@@ -1,6 +1,6 @@
 &emsp;&emsp;在数字逻辑设计的实验课程中，我们已经学习了如何使用时序仿真来对数字电路进行功能验证。所谓仿真，指的是基于软件模拟 (而非电路实测)的方法来验证电路功能，其基本原理如图10-1所示。
 
-<center><img src = "assets/10-1.png" width = 550></center>
+<center><img src = "../assets/lab1/10-1.png" width = 550></center>
 <center>图10-1 仿真原理</center>
 
 &emsp;&emsp;在图10-1中，我们给待验证电路 (DUT, Design Under Test) 添加一些特定的输入激励，然后观察DUT的输出结果是否符合我们的预期。其中，输入激励和输出结果的检查合称为Testbench。
@@ -11,7 +11,7 @@
 
 &emsp;&emsp;Trace比对的基本原理如图10-2所示。
 
-<center><img src = "assets/10-2.png" width = 500></center>
+<center><img src = "../assets/lab1/10-2.png" width = 500></center>
 <center>图10-2 Trace比对的基本原理</center>
 
 &emsp;&emsp;使用Trace比对进行CPU功能验证的基本方法是：

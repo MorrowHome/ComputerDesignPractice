@@ -6,7 +6,7 @@
 
 &emsp;&emsp;在Vivado中，右键点击`Project Manager`下面`Sources`中的`Constraints`，在弹出的菜单中选择`Add Source…`，并按照图B-1所示的设置点击`Next`。
 
-<center><img src="assets/B-1.png"></center>
+<center><img src="../assets/lab1/B-1.png"></center>
 <center>图B-1 添加或创建约束文件</center>
 
 ## 2. I/O引脚约束

@@ -37,7 +37,7 @@
 
 &emsp;&emsp;miniRV指令集的指令格式与RISC-V完全相同，如图2-1所示。
 
-<center><img src = "assets/2-1.png" width = 650></center>
+<center><img src = "../assets/lab1/2-1.png" width = 650></center>
 <center>图2-1 miniRV指令格式</center>
 
 ## 3. miniRV指令速查表
@@ -45,7 +45,7 @@
 &emsp;&emsp;miniRV指令的格式、功能、语法及解释汇总如表2-2所示。其中，浅蓝色背景的是A组指令，浅橙色的则是B组指令，而绿色字体的指令则是demo工程已经实现的指令。
 
 <center>表2-2 miniRV指令速查表</center>
-<center><img src = "assets/t2-2.png"></center>
+<center><img src = "../assets/lab1/t2-2.png"></center>
 
 &emsp;&emsp;下面对每条指令的格式、功能等给出详细解释，所使用的符号约定如表2-3所示。
 

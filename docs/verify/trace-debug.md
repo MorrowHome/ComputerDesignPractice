@@ -32,11 +32,11 @@
 
 &emsp;&emsp;例如，某次测试时报错，`debug_wb_pc`显示了`0x000018f8`，如下图所示。
 
-<center><img src = "assets/t-1.png" width = 400></center>
+<center><img src = "../assets/verify/t-1.png" width = 400></center>
 
 &emsp;&emsp;打开start.dump文件，找到PC值为`0x000018f8`的指令，即可定位到具体出错的指令，如下图所示。
 
-<center><img src = "assets/t-2.png" width = 650></center>
+<center><img src = "../assets/verify/t-2.png" width = 650></center>
 
 &emsp;&emsp;显然，在上述例子中，mycpu执行到auipc指令时出错。
 
