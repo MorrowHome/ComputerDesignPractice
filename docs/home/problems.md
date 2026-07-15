@@ -46,19 +46,19 @@
 
 &emsp;&emsp;**Step3**：综合完成后，在Vivado默认界面左侧的`Flow Navigator`下，找到并展开`SYNTHESIS`下的`Open Synthesized Design`，点击`Report Timing Summary`，如下图所示。
 
-<center><img src = "../assets/p-1.7-1.png" width = 200></center>
+<center><img src = "assets/p-1.7-1.png" width = 200></center>
 
 &emsp;&emsp;随后将弹出`Report Timing Summary`的对话框，直接点击`OK`按钮，即可在Vivado默认界面下方的区域查看时序总结报告。工程中的时序违例相关信息将被红色字体标注，如下图所示。
 
-<center><img src = "../assets/p-1.7-2.png"></center>
+<center><img src = "assets/p-1.7-2.png"></center>
 
 &emsp;&emsp;**Step4**：展开标红的子项，查看关键路径，如下图所示。
 
-<center><img src = "../assets/p-1.7-3.png"></center>
+<center><img src = "assets/p-1.7-3.png"></center>
 
 &emsp;&emsp;若想借助电路图分析，可在某条关键路径上打开右键菜单并点击`Schematic`，如下图所示。
 
-<center><img src = "../assets/p-1.7-4.png"></center>
+<center><img src = "assets/p-1.7-4.png"></center>
 
 !!! info "补充说明 :book:"
     &emsp;&emsp;Step1并非必须 —— 当CPU主频较低时，工程中不存在时序违例，此时Step3的时序报告仍会显示关键路径，但并非以红色字显示。
@@ -69,7 +69,7 @@
 
 &emsp;&emsp;（1）单周期CPU实现所有指令，能够跑通Basic Trace；
 
-&emsp;&emsp;（2）完成理想流水线CPU，通过<a href="../../lab2-A/2-idealpl/#3-cpu" target=_blank>功能仿真</a>，并在课上通过现场检查；
+&emsp;&emsp;（2）完成理想流水线CPU，通过<a href="../lab2-A/2-idealpl.md#3-cpu" target=_blank>功能仿真</a>，并在课上通过现场检查；
 
 &emsp;&emsp;（3）为单周期CPU实现AXI总线，跑通<a href="https://gitee.com/hitsz-cslab/cdp-tests/blob/miniRV/asm/lw.dump" target=_blank>lw.dump</a>、<a href="https://gitee.com/hitsz-cslab/cdp-tests/blob/miniRV/asm/sw.dump" target=_blank>sw.dump</a>的功能仿真测试。
 
@@ -79,9 +79,9 @@
 
 &emsp;&emsp;（1）完成A组或B组指令的单周期CPU，跑通Basic Trace；
 
-&emsp;&emsp;（2）完成理想流水线CPU，通过<a href="../../lab2-A/2-idealpl/#3-cpu" target=_blank>功能仿真</a>，并在课上通过现场检查；
+&emsp;&emsp;（2）完成理想流水线CPU，通过<a href="../lab2-A/2-idealpl.md#3-cpu" target=_blank>功能仿真</a>，并在课上通过现场检查；
 
-&emsp;&emsp;（3）完成<a href="../../lab2-B/5-ioupg" target=_blank>实验2的I/O接口编程任务</a>，并在课上通过现场检查；
+&emsp;&emsp;（3）完成<a href="../lab2-B/5-ioupg.md" target=_blank>实验2的I/O接口编程任务</a>，并在课上通过现场检查；
 
 &emsp;&emsp;完成以上内容，并且还要认真完成报告，才能及格。
 
@@ -119,7 +119,7 @@
 
 #### 2.7 Trace验证时，所有指令都显示Time out
 
-&emsp;&emsp;仔细按照<a href="../../trace/trace/#2" target="_blank">Trace测试说明</a>逐一检查debug信号、模块名、存储器参数设置等是否符合要求。
+&emsp;&emsp;仔细按照<a href="../trace/trace.md#2" target="_blank">Trace测试说明</a>逐一检查debug信号、模块名、存储器参数设置等是否符合要求。
 
 &emsp;&emsp;此外Time out可能是因为CPU本身陷入了长时间等待状态，比如发出了取指请求，但一直没有收到指令；或者一条指令执行完之后，一直没有取下一条指令；又或者数据访存出问题等等。此种情况，可结合Trace测试的仿真波形进行分析。
 
@@ -155,13 +155,13 @@
 
 &emsp;&emsp;建议换用实验室的WSL2虚拟机环境。
 
-<center><img src = "../assets/p-2.14-1.png" width=550></center>
+<center><img src = "assets/p-2.14-1.png" width=550></center>
 
 &emsp;&emsp;推荐用MobaXTerm来连接Trace远程平台，而不是用VSCode连接 —— VSCode连接远程服务器会占用较多网络资源，尤其是本课程有很多同学同时使用远程平台！
 
 #### 2.15 执行make提示“No rule to make”
 
-<center><img src = "../assets/p-2.15-1.png" width=650></center>
+<center><img src = "assets/p-2.15-1.png" width=650></center>
 
 &emsp;&emsp;执行make前，先确保已经通过`cd`命令进入了`cdp-tests`目录。如果目录没问题，则检查`cdp-tests`目录是否包含`Makefile`文件。如果包含，但仍然提示“No rule to make”，则备份好个人代码，删除现有`cdp-tests`目录并重新下载和编译。
 
@@ -185,21 +185,21 @@
 
 &emsp;&emsp;**Step1**：关闭`Hardware`窗口的`server`，如下图所示。
 
-<center><img src = "../assets/p-3.1-1.png" width = 400></center>
+<center><img src = "assets/p-3.1-1.png" width = 400></center>
 
 &emsp;&emsp;**Step2**：点击`Open target` -> `Open New Target...`，如下图所示。
 
-<center><img src = "../assets/p-3.1-2.png" width = 330></center>
+<center><img src = "assets/p-3.1-2.png" width = 330></center>
 
 &emsp;&emsp;随后将弹出一个窗口，点击`Next`按钮。
 
 &emsp;&emsp;**Step3**：确保`Connect to:`选择的是`Local server`，并继续点击`Next`按钮，如下图所示。
 
-<center><img src = "../assets/p-3.1-3.png" width = 600></center>
+<center><img src = "assets/p-3.1-3.png" width = 600></center>
 
 &emsp;&emsp;等待进度条走完，将显示当前连接的`Hardware Targets`，如下图所示。
 
-<center><img src = "../assets/p-3.1-4.png"></center>
+<center><img src = "assets/p-3.1-4.png"></center>
 
 &emsp;&emsp;实际操作中，若上图所示的界面未显示有`Hardware Targets`，则点击`Back`按钮，并重新尝试Step3 —— Micro USB接口的开发板版本较老，有时需多重复尝试几次才能连上。
 
@@ -233,13 +233,13 @@
 
 &emsp;&emsp;仿真和下板出现不一致的情况，可能是以下几个原因：
 
-&emsp;&emsp;（1）<a href="../codingstyle/" target="_blank">代码规范性</a>问题，比如寄存器未赋初值、阻塞赋值和非阻塞赋值混用、多驱动等；  
+&emsp;&emsp;（1）<a href="codingstyle.md" target="_blank">代码规范性</a>问题，比如寄存器未赋初值、阻塞赋值和非阻塞赋值混用、多驱动等；  
 &emsp;&emsp;（2）关键路径延迟太长，导致不满足`Setup time`或`Hold time` —— 可尝试优化关键路径或降低CPU主频；  
 &emsp;&emsp;（3）组合逻辑出现竞争或冒险。
 
 &emsp;&emsp;常见的问题包括：阻塞赋值和非阻塞赋值混用、组合逻辑的`if`语句没有`else`、`case`语句没有`default`、时钟频率不合适，或下板用的汇编程序有bug等等。
 
-&emsp;&emsp;仿真和下板不一致时，问题可能比较隐晦，<u>需要耐心排查代码</u>。查错时，也可以参考Vivado的Warning信息、log日志等；当然也可使用<a href="../../verify/online-debug/" target="_blank">FPGA在线调试方法</a>抓取运行时波形进行分析。
+&emsp;&emsp;仿真和下板不一致时，问题可能比较隐晦，<u>需要耐心排查代码</u>。查错时，也可以参考Vivado的Warning信息、log日志等；当然也可使用<a href="../verify/online-debug.md" target="_blank">FPGA在线调试方法</a>抓取运行时波形进行分析。
 
 #### 3.6 `Timing Report`中的`WNS`、`TNS`等几个时间都显示`NA`
 

@@ -42,8 +42,8 @@
   </tr>
   <tr>
    <th rowspan=5 style="text-align: center; vertical-align: middle;">实验1：<br>单周期CPU</th>
-   <td align="left"><a href="../lab1/0-overview" target=_blank>A组指令</a>的数据通路表、控制信号表</td>
-   <td align="left"><a href="../lab1/0-overview" target=_blank>B组指令</a>的数据通路表、控制信号表</td>
+   <td align="left"><a href="lab1/0-overview.md" target=_blank>A组指令</a>的数据通路表、控制信号表</td>
+   <td align="left"><a href="lab1/0-overview.md" target=_blank>B组指令</a>的数据通路表、控制信号表</td>
   </tr>
   <tr>
    <td align="left" colspan=2>【合作】讨论交流，共同完成完整单周期CPU的数据通路图绘制</td>
@@ -98,7 +98,7 @@
 
 - ^^各班人数均接近实验室最大容量^^，**非必要请勿换班上课！自习的请自觉在其他班上课前离开！** 否则座位可能不够！
 
-<center><img src = "./time_tbl.png" width = 100%></center>
+<center><img src = "time_tbl.png" width = 100%></center>
 
 
 

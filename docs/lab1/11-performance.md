@@ -8,7 +8,7 @@
 
 &emsp;&emsp;单周期CPU执行的大部分指令都是单周期指令。这些指令的执行延迟全部都落在同一个时钟周期之内。比如ADD指令的执行延迟及时序如图11-1所示。
 
-<center><img src = "../assets/11-1.png" width = 600></center>
+<center><img src = "assets/11-1.png" width = 600></center>
 <center>图11-1 ADD指令执行延迟示意图</center>
 
 &emsp;&emsp;在图11-1中，所有红色箭头加起来代表了ADD指令的执行延迟。显然，只有 **当指令的执行延迟不超过一个时钟周期的时间，指令才能产生正确的执行结果**。换言之，**对于单周期CPU而言，CPU的时钟频率受限于执行最慢的单周期指令**。

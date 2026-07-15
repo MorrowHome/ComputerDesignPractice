@@ -6,7 +6,7 @@
 
 &emsp;&emsp;在Vivado中，右键点击`Project Manager`下面`Sources`中的`Constraints`，在弹出的菜单中选择`Add Source…`，并按照图B-1所示的设置点击`Next`。
 
-<center><img src="../assets/B-1.png"></center>
+<center><img src="assets/B-1.png"></center>
 <center>图B-1 添加或创建约束文件</center>
 
 ## 2. I/O引脚约束
@@ -33,7 +33,7 @@ set_property IOSTANDARD LVCMOS33 [get_ports led_o[0]]
     set_property -dict { IOSTANDARD LVCMOS33 PACKAGE_PIN F6 } [get_ports led_o[0]]
     ```
 
-&emsp;&emsp;引脚分配既可以参考<a href="../../home/fpga/" target="_blank">开发板使用须知</a>，也可以直接在开发板的丝印上读出。例如，观察开发板最右侧的拨码开关下方丝印着“`SW0-W4`”，表示拨码开关SW0对应FPGA的`W4`引脚。
+&emsp;&emsp;引脚分配既可以参考<a href="../home/fpga.md" target="_blank">开发板使用须知</a>，也可以直接在开发板的丝印上读出。例如，观察开发板最右侧的拨码开关下方丝印着“`SW0-W4`”，表示拨码开关SW0对应FPGA的`W4`引脚。
 
 ## 3. 时钟约束
 

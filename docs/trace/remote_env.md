@@ -11,7 +11,7 @@
 
 &emsp;&emsp;远程实验平台共有8个计算节点，每一个计算节点都提供相同的服务，可能你每次登录的计算节点会不一样，但无须担心，你看到的文件都是一样的。
 
-<center><img src = "../assets/remote-1.png" width = 400></center>
+<center><img src = "assets/remote-1.png" width = 400></center>
 
 ## 2. 快速入门
 
@@ -37,9 +37,9 @@
 
 ![安装插件](assets/vscode_extension.png)
 
-&emsp;&emsp;左侧边栏将出现此图标：<img src = "../assets/icon.png" width = 30>。点击这个图标，选择`SSH TARGETS`右侧的`+`号，如下图所示。
+&emsp;&emsp;左侧边栏将出现此图标：<img src = "assets/icon.png" width = 30>。点击这个图标，选择`SSH TARGETS`右侧的`+`号，如下图所示。
 
-<center><img src = "../assets/ssh_add_host.png" width = 400></center>
+<center><img src = "assets/ssh_add_host.png" width = 400></center>
 
 &emsp;&emsp;这会在屏幕上方中央弹出输入框，要求输入ssh指令。在这里输入`ssh 你的学号@计算节点IP -p 6666`，例如`ssh 200110101@10.249.12.98 -p 6666`就是学号为200110101的同学链接到远程实验平台，端口号为6666。
 
@@ -51,7 +51,7 @@
 
 &emsp;&emsp;现在，SSH Target添加成功，左侧SSH Target中应该增加了一栏。将鼠标移上去，点击这一栏右侧的小图标：
 
-<center><img src = "../assets/connect1.png" width = 320></center>
+<center><img src = "assets/connect1.png" width = 320></center>
 
 &emsp;&emsp;这会打开一个新的VS Code窗口。新打开的窗口会要求你选择目标机器的平台，选择Linux，按下回车：
 
@@ -77,7 +77,7 @@
 
 &emsp;&emsp;此时，它会要求你输入旧密码。旧密码（即默认密码）为你的学号。完成后回车。随后，它会要求你输入新密码，并进行确认。
 
-<center><img src = "../assets/passwd.png" width = 350></center>
+<center><img src = "assets/passwd.png" width = 350></center>
 
 !!! warning "注意事项 :loudspeaker:"
     &emsp;&emsp;如果VSCode出现`bad owner or permission`报错，解决方法可参考《<a href="https://cloud.tencent.com/developer/article/1643437" target="_blank">Win10下Bad owner or permissions on .ssh/config的解决办法-腾讯云</a>》。
@@ -86,7 +86,7 @@
 
 &emsp;&emsp;接下来，我们将cdp-tests测试源码包复制到自己的工作空间。
 
-&emsp;&emsp;参考<a href="../trace/#2" target="_blank">上一节</a>，在终端中执行相应的git clone命令下载测试框架。
+&emsp;&emsp;参考<a href="trace.md#2" target="_blank">上一节</a>，在终端中执行相应的git clone命令下载测试框架。
 
 &emsp;&emsp;你应该会看到这样的输出：
 
@@ -117,7 +117,7 @@
 
 ![连接8](assets/connect8.png)
 
-&emsp;&emsp;此时，提示top模块有错误，这时你就可以在mycpu目录下添加你自己的CPU代码了，详见<a href="../trace/#2" target="_blank">测试框架</a>说明。
+&emsp;&emsp;此时，提示top模块有错误，这时你就可以在mycpu目录下添加你自己的CPU代码了，详见<a href="trace.md#2" target="_blank">测试框架</a>说明。
 
 ![连接9](assets/connect9.png) --> 
 
@@ -129,7 +129,7 @@
 
 &emsp;&emsp;打开MobaXterm，单击打开位于左上角的工具`Session`，选择`New sessions`打开新建窗口，选择`SSH`，输入远程服务器的IP地址、登陆用户名及端口（ **端口号：6666** ），点击OK。
 
-<center><img src = "../assets/mobaxterm-1.png" width = 600></center>
+<center><img src = "assets/mobaxterm-1.png" width = 600></center>
 
 &emsp;&emsp;在弹出的对话框中，选择SSH。
 
@@ -212,7 +212,7 @@
 
 &emsp;&emsp;确保你输入的是正常的半角英文字符与英文标点符号，如图所示：
 
-<center><img src = "../assets/char.png" width = 600></center>
+<center><img src = "assets/char.png" width = 600></center>
 
 &emsp;&emsp;这可以通过一起按下shift+空格，或者切换到英文输入法解决。
 

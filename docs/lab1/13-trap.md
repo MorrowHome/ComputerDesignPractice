@@ -16,7 +16,7 @@
     &emsp;&emsp;==本课程不涉及S模式和U模式，因此在实现例外和中断处理时，应当使用`MEPC`、`MCAUSE`等M模式的CSR。==
 
 !!! info "知识回顾 :book:"
-    <embed src = "../assets/ch5_pipeline_spring2025.pdf#page=97" width="100%" height="460">
+    <embed src = "assets/ch5_pipeline_spring2025.pdf#page=97" width="100%" height="460">
 
 
 
@@ -47,7 +47,7 @@
 &emsp;&emsp;`MCAUSE`寄存器记录例外或中断的原因。`MCAUSE`寄存器由`Interrupt`（`MCAUSE[31]`）和`Exception Code`（`MCAUSE[30:0]`）两个字段构成。其中，`Interrupt`字段记录是否发生中断，`Exception Code`字段则表示例外或中断的具体原因，详见表11-1。
 
 <center>表11-1 `MCAUSE`寄存器格式</center>
-<center><img src = "../assets/11-1.png" width = 450></center>
+<center><img src = "assets/11-1.png" width = 450></center>
 
 &emsp;&emsp;在本课程中，只需考虑M模式的外部中断和系统调用两种情况，即`MCAUSE`的有效值要么是`32'h8000000b`，要么是`32'h0000000b`。
 
@@ -56,7 +56,7 @@
 &emsp;&emsp;为了实现例外与中断处理功能，需要增加如表11-2所示的三条指令。
 
 <center>表11-2 例外与中断指令表</center>
-<center><img src = "../assets/11-2.png" width = 100%></center>
+<center><img src = "assets/11-2.png" width = 100%></center>
 
 &emsp;&emsp;**（1）`csrrwi` 指令**
 

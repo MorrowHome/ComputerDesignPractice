@@ -10,7 +10,7 @@ assign ifetch_addr = pc;
 
 &emsp;&emsp;单周期指令，指的是取到指令机器码之后，能够在一个时钟周期之内执行完毕的指令，比如加法指令、分支跳转指令等。这些指令的时序如图9-1所示。
 
-<center><img src = "../assets/9-1.png" width = 420></center>
+<center><img src = "assets/9-1.png" width = 420></center>
 <center>图9-1 单周期指令时序图</center>
 
 !!! info "时序解读 :teacher:"
@@ -28,7 +28,7 @@ assign ifetch_addr = pc;
 
 &emsp;&emsp;访存指令的时序如图9-2所示。
 
-<center><img src = "../assets/9-2.png" width = 580></center>
+<center><img src = "assets/9-2.png" width = 580></center>
 <center>图9-2 多周期指令时序图</center>
 
 !!! info "时序解读 :teacher:"
@@ -40,7 +40,7 @@ assign ifetch_addr = pc;
 
 &emsp;&emsp;乘除法指令的时序与访存指令类似，如图9-3所示。
 
-<center><img src = "../assets/9-3.png" width = 580></center>
+<center><img src = "assets/9-3.png" width = 580></center>
 <center>图9-3 多周期指令时序图</center>
 
 !!! info "时序解读 :teacher:"

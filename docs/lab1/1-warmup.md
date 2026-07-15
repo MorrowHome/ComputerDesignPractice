@@ -18,26 +18,26 @@
 &emsp;&emsp;点击实验指导书首页的课程材料下载链接，根据需要选择下载对应的demo工程。
 
 !!! info "有4个demo工程，我要下载哪个？"
-    <center><img src = "../assets/1-1.png" width = 350></center>
+    <center><img src = "assets/1-1.png" width = 350></center>
     <center>图1-1 根据实际情况，选择其中一个demo工程</center>
 
     &emsp;&emsp;首先，选择指令集是miniRV或miniLA，然后再根据上课的实验室进行选取 —— 在T2210、T2507上课的同学，请选择文件名带有“`ego1`”后缀的工程；而在T2506、T2612上课的同学，则选择文件名带有“`minisys`”后缀的工程。
 
 &emsp;&emsp;在Vivado界面左侧点击运行功能仿真，如图1-2所示。等待一段时间后，出现仿真波形窗口。
 
-<center><img src = "../assets/1-2.png" width = 450></center>
+<center><img src = "assets/1-2.png" width = 450></center>
 <center>图1-2 运行功能仿真</center>
 
 &emsp;&emsp;点击Run All按钮，如图1-3所示，Testbench将通过测试并停止。
 
-<center><img src = "../assets/1-3.png" width = 320></center>
+<center><img src = "assets/1-3.png" width = 320></center>
 <center>图1-3 继续仿真直至结束或报错停止</center>
 
 &emsp;&emsp;此时的仿真波形是CPU运行<a href="https://gitee.com/hitsz-cslab/cdp-tests/blob/miniRV/asm/lw.dump" target=_blank>lw.dump</a>测试程序（miniLA则是<a href="https://gitee.com/hitsz-cslab/cdp-tests/blob/miniLA/asm/ld.w.dump" target=_blank>ld.w.dump</a>）所产生的。
 
 &emsp;&emsp;仿真波形窗口默认包含了复位、时钟、外设信号，以及CPU的取指信号和数据访存信号，各信号的解释和说明如图1-4所示。
 
-<center><img src = "../assets/1-4.png" width = 320></center>
+<center><img src = "assets/1-4.png" width = 320></center>
 <center>图1-4 波形配置文件`soc_simple_tb.wcfg`的信号说明</center>
 
 !!! info "外设信号的波形为什么是高阻 <font color="blue">**Z**</font>？"
@@ -88,7 +88,7 @@
 !!! info "取指时序解读"
     &emsp;&emsp;此处以miniRV的demo工程为例，介绍CPU的取指时序。在仿真波形上任意选取一段波形，如图1-5所示。
 
-    <center><img src = "../assets/1-5.png" width = 480></center>
+    <center><img src = "assets/1-5.png" width = 480></center>
     <center>图1-5 CPU的取指波形示例</center>
     
     - 【*1320ns*】CPU需要取指时拉高`ifetch_req`信号，同时给出指令地址`ifetch_addr`。`inst_req`信号 <mark>**仅有效一个时钟周期**</mark>。  
@@ -158,7 +158,7 @@
 !!! info "读数据时序解读"
     &emsp;&emsp;此处以miniRV的demo工程为例，介绍CPU读数据的时序。在仿真波形上任意选取一段波形，如图1-6所示。
 
-    <center><img src = "../assets/1-6.png" width = 530></center>
+    <center><img src = "assets/1-6.png" width = 530></center>
     <center>图1-6 CPU的读数据波形示例</center>
     
     &emsp;&emsp;由<a href="https://gitee.com/hitsz-cslab/cdp-tests/blob/miniRV/asm/lw.dump#L13" target=_blank>lw.dump第13行</a>可知，地址为`0xC`的指令机器码是`0x0000a703`（`lw x14, 0(x1)`），是读访存指令。
@@ -172,30 +172,30 @@
 
 ## 3. 实例解析
 
-&emsp;&emsp;下面以miniRV demo工程已实现的`addi`指令为例，结合<a href="../5-ctrler/#2" target=_blank>数据通路表</a>和<a href="../5-ctrler/#3" target=_blank>控制信号表</a>示例、仿真波形、CPU示例代码以及汇编代码，解释指令在单周期CPU中的执行过程。同学们请参照此过程自行分析和理解其他指令的执行原理。此外，还可参考<a href="../3-parts" target=_blank>实验原理-2.CPU基础架构-基本功能部件</a>来理解demo工程CPU的各个功能部件的实现逻辑和代码。
+&emsp;&emsp;下面以miniRV demo工程已实现的`addi`指令为例，结合<a href="5-ctrler.md#2" target=_blank>数据通路表</a>和<a href="5-ctrler.md#3" target=_blank>控制信号表</a>示例、仿真波形、CPU示例代码以及汇编代码，解释指令在单周期CPU中的执行过程。同学们请参照此过程自行分析和理解其他指令的执行原理。此外，还可参考<a href="3-parts.md" target=_blank>实验原理-2.CPU基础架构-基本功能部件</a>来理解demo工程CPU的各个功能部件的实现逻辑和代码。
 
 
 !!! tip "将信号添加到仿真波形"
     &emsp;&emsp;先在左侧Scope窗口选中想要查看信号的模块，然后在旁边Objects窗口选中想要查看的信号，直接单击鼠标拖动即可将其添加到波形窗口，如图1-7所示。也可使用 ++shift++ 或 ++ctrl++ 加鼠标单击来一次选择多个信号。
 
-    <center><img src = "../assets/1-7.png" width = 650></center>
+    <center><img src = "assets/1-7.png" width = 650></center>
     <center>图1-7 添加信号到仿真波形窗口</center>
 
 &emsp;&emsp;在波形上定位到1840ns处，可见此时`ifetch_req`有效，且`ifetch_addr`的值为`32'h30`，说明此时正在对地址为`0x30`的指令进行取指。在下一拍，即1860ns处，`ifetch_valid`有效，且`ifetch_inst`的值为`32'hf0038393`，说明地址为`0x30`的指令已经取到，机器码是`0xf0038393`，如图1-8所示。
 
-<center><img src = "../assets/1-8.png" width = 480></center>
+<center><img src = "assets/1-8.png" width = 480></center>
 <center>图1-8 `addi`指令仿真波形示例</center>
 
 &emsp;&emsp;在<a href="https://gitee.com/hitsz-cslab/cdp-tests/blob/miniRV/asm/lw.dump#L24" target=_blank>lw.dump</a>中搜索指令地址可知，地址为`0x30`的指令机器码是`0xf0038393`，即`addi x7, x7, -256`指令，如图1-9所示，与仿真波形相符。
 
-<center><img src = "../assets/1-9.png" width = 600></center>
+<center><img src = "assets/1-9.png" width = 600></center>
 <center>图1-9 lw.dump测试程序中的`addi`指令</center>
 
 ### 取指单元
 
 &emsp;&emsp;`addi`指令的取指单元相关的数据通路和控制信号如图1-10所示。
 
-<center><img src = "../assets/1-10.png" width = 300></center>
+<center><img src = "assets/1-10.png" width = 300></center>
 <center>图1-10 `addi`指令的数据通路和控制信号（取指单元）</center>
 
 &emsp;&emsp;由数据通路表可知，对于`addi`指令，PC的新值由NPC模块的`npc`输出信号产生，相关代码如下：
@@ -234,7 +234,7 @@ end
 
 &emsp;&emsp;把控制器产生的`npc_op`信号、NPC产生的`npc`信号添加到波形，如图1-11所示。
 
-<center><img src = "../assets/1-11.png" width = 450></center>
+<center><img src = "assets/1-11.png" width = 450></center>
 <center>图1-11 查看`addi`指令的取指单元的相关信号</center>
 
 &emsp;&emsp;注意，**只有当`ifetch_valid`有效时，`ifetch_inst`才是有效的，相关信号也才是有效的**。因此，我们应当观察`npc_op`和`npc`信号在1860ns的值。可见`npc_op`等于`2'b00`（即``NPC_PC4`），`npc`等于`32'h34`（即当前PC值`0x30`再加4），与数据通路表、控制信号表及相关代码相符。
@@ -244,7 +244,7 @@ end
 
 &emsp;&emsp;`addi`指令的译码单元相关的数据通路和控制信号如图1-12所示。
 
-<center><img src = "../assets/1-12.png" width = 480></center>
+<center><img src = "assets/1-12.png" width = 480></center>
 <center>图1-12 `addi`指令的数据通路和控制信号（译码单元）</center>
 
 &emsp;&emsp;由数据通路表可知，`addi`指令的源操作数是RS1寄存器和立即数。其中，RS1寄存器的值需要使用机器码第19位到第15位来读取RF获得，相关代码如下：
@@ -300,7 +300,7 @@ end
 
 &emsp;&emsp;把控制器产生的`sext_op`、`rf_we`、`rf_wsel`信号，以及RS1寄存器的值（即RF的`rD1`输出信号）、扩展后的立即数（即SEXT的`ext`输出信号）添加到波形，如图1-13所示。
 
-<center><img src = "../assets/1-13.png" width = 450></center>
+<center><img src = "assets/1-13.png" width = 450></center>
 <center>图1-13 查看`addi`指令的译码单元的相关信号</center>
 
 &emsp;&emsp;同样地，我们应当观察`ifetch_valid`信号有效时的信号值。可见`sext_op`等于`3'h0`（即````EXT_I```）、`rf_wsel`等于0（即``WB_ALU`）、`rf_we`等于1表示指令要写回，与数据通路表、控制信号表及相关代码相符。
@@ -317,7 +317,7 @@ end
 
 &emsp;&emsp;`addi`指令的执行单元相关的数据通路和控制信号如图1-14所示。
 
-<center><img src = "../assets/1-14.png" width = 350></center>
+<center><img src = "assets/1-14.png" width = 350></center>
 <center>图1-14 `addi`指令的数据通路和控制信号（执行单元）</center>
 
 &emsp;&emsp;由数据通路表可知，`addi`指令需要ALU完成加法运算。加法的源数据1来自RS1寄存器，源数据2来自扩展后的立即数，相关代码如下：
@@ -346,7 +346,7 @@ assign alu_b = alub_sel ? ext : rf_rd2;
 
 &emsp;&emsp;把控制器产生的`alu_op`、`alub_sel`信号，以及ALU的操作数`a`、`b`以及运算结果`c`添加到波形，如图1-15所示。
 
-<center><img src = "../assets/1-15.png" width = 450></center>
+<center><img src = "assets/1-15.png" width = 450></center>
 <center>图1-15 查看`addi`指令的执行单元的相关信号</center>
 
 &emsp;&emsp;由波形可知，`alu_op`等于`5'h0`（即````ALU_ADD```）、`alub_sel`等于1（即选择立即数作为源操作数2），与数据通路表、控制信号表及相关代码相符。此外，ALU的两个操作数与译码单元得到的两个源操作数相同。
@@ -356,12 +356,12 @@ assign alu_b = alub_sel ? ext : rf_rd2;
 
 &emsp;&emsp;`addi`指令的存储单元相关的数据通路和控制信号如图1-16所示。
 
-<center><img src = "../assets/1-16.png" width = 390></center>
+<center><img src = "assets/1-16.png" width = 390></center>
 <center>图1-16 `addi`指令的数据通路和控制信号（存储单元）</center>
 
 &emsp;&emsp;`addi`指令是算术运算指令，不需要访存，因此控制信号表中的`ram_rop`信号为0，对应波形如图1-17所示。
 
-<center><img src = "../assets/1-17.png" width = 450></center>
+<center><img src = "assets/1-17.png" width = 450></center>
 <center>图1-17 查看`addi`指令的存储单元的相关信号</center>
 
 &emsp;&emsp;由波形可知，`ram_rop`和`daccess_ren`均为0，表示指令没有发出访存请求。

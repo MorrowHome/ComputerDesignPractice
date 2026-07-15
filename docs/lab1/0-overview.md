@@ -17,14 +17,14 @@
     &emsp;&emsp;miniRV指令集如表0-1所示。其中，浅蓝色背景的是A组指令，浅橙色背景的是B组指令，绿色字体的8条指令是模板工程已经实现的示例指令。
 
     <center>表0-1 miniRV指令概览表</center>
-    <center><img src = "../assets/t0-1.png" width = 500></center>
+    <center><img src = "assets/t0-1.png" width = 500></center>
 
 === "miniLA :dragon:"
 
     &emsp;&emsp;miniLA指令集如表0-1A所示。其中，浅蓝色背景的是A组指令，浅橙色背景的是B组指令，绿色字体的8条指令是模板工程已经实现的示例指令。
 
     <center>表0-1A miniLA指令概览表</center>
-    <center><img src = "../assets/t0-1A.png" width = 500></center>
+    <center><img src = "assets/t0-1A.png" width = 500></center>
 
 &emsp;&emsp;本实验的具体要求如下：
 

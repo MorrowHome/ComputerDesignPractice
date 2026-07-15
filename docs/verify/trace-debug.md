@@ -9,7 +9,7 @@
 
 ## 1. 导入测试程序
 
-&emsp;&emsp;按照<a href="../../lab2-A/7-step" target=_blank>流水线CPU实验步骤</a>，使用bin2coe.py脚本把 `cdp-tests` / `bin` 目录下的start.bin转换成.coe文件并导入`bram_axi`的IP核。
+&emsp;&emsp;按照<a href="../lab2-A/7-step.md" target=_blank>流水线CPU实验步骤</a>，使用bin2coe.py脚本把 `cdp-tests` / `bin` 目录下的start.bin转换成.coe文件并导入`bram_axi`的IP核。
 
 &emsp;&emsp;接着，运行综合、实现、生成比特流，最终下板运行Trace测试。
 
@@ -32,12 +32,12 @@
 
 &emsp;&emsp;例如，某次测试时报错，`debug_wb_pc`显示了`0x000018f8`，如下图所示。
 
-<center><img src = "../assets/t-1.png" width = 400></center>
+<center><img src = "assets/t-1.png" width = 400></center>
 
 &emsp;&emsp;打开start.dump文件，找到PC值为`0x000018f8`的指令，即可定位到具体出错的指令，如下图所示。
 
-<center><img src = "../assets/t-2.png" width = 650></center>
+<center><img src = "assets/t-2.png" width = 650></center>
 
 &emsp;&emsp;显然，在上述例子中，mycpu执行到auipc指令时出错。
 
-&emsp;&emsp;如果在虚拟机的Trace测试框架中通过了测试，但下板运行Trace测试程序时出错，即出现仿真和下板不一致的情况，请参考<a href="../../home/problems/#36" target="_blank">常见问题汇总之3.6</a>。
+&emsp;&emsp;如果在虚拟机的Trace测试框架中通过了测试，但下板运行Trace测试程序时出错，即出现仿真和下板不一致的情况，请参考<a href="../home/problems.md#36" target="_blank">常见问题汇总之3.6</a>。

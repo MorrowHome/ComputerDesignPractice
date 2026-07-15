@@ -7,12 +7,12 @@
     
     &emsp;&emsp;点击Vivado菜单栏的`Project Summary`按钮，如图1所示。
 
-    <center><img src = "../assets/j-1.png" width = 500></center>
+    <center><img src = "assets/j-1.png" width = 500></center>
     <center>图1 查看工程的简要报告</center>
 
     &emsp;&emsp;然后，找到页面下方的`Timing`、`Utilization`以及`Power`项，点击`Post-Implementation`后截图保存，如图2所示。
 
-    <center><img src = "../assets/j-2.png"></center>
+    <center><img src = "assets/j-2.png"></center>
     <center>图2 将资源使用情况和功耗数据截图</center>
 
 ## 2. 提交要求

@@ -34,13 +34,13 @@
 
 &emsp;&emsp;比如，我们想要在FPGA板上观察debug信号、PC寄存器和数码管寄存器，需要在代码里这样设置。
 
-<center><img src = "../assets/v-1(1).jpg" width = 400></center>
+<center><img src = "assets/v-1(1).jpg" width = 400></center>
 <center>抓取写回信息</center>
 
-<center><img src = "../assets/v-1(2).jpg" width = 400></center>
+<center><img src = "assets/v-1(2).jpg" width = 400></center>
 <center>抓取PC寄存器</center>
 
-<center><img src = "../assets/v-1(3).jpg" width = 400></center>
+<center><img src = "assets/v-1(3).jpg" width = 400></center>
 <center>抓取数码管寄存器</center>
 
 &emsp;&emsp;设定完成后，就可以运行综合了。
@@ -51,69 +51,69 @@
 
 &emsp;&emsp;点击工程左侧synthesis->Open Synthesized Desgin->Set Up Debug。
 
-<center><img src = "../assets/v-2.jpg" width = 280></center>
+<center><img src = "assets/v-2.jpg" width = 280></center>
 
 &emsp;&emsp;随后会出现如下界面，点击Next：
 
-<center><img src = "../assets/v-3.jpg" width = 600></center>
+<center><img src = "assets/v-3.jpg" width = 600></center>
 
 &emsp;&emsp;随后会列出抓取的Debug信息，点击Next：
 
-<center><img src = "../assets/v-4.jpg" width = 600></center>
+<center><img src = "assets/v-4.jpg" width = 600></center>
 
 &emsp;&emsp;选择抓取的深度和触发控制类型，点击Next（更高级的调试可以勾选“Advanced trigger”）：
 
-<center><img src = "../assets/v-5.jpg" width = 600></center>
+<center><img src = "assets/v-5.jpg" width = 600></center>
 
 &emsp;&emsp;最后，点击Finish：
 
-<center><img src = "../assets/v-6.jpg" width = 600></center>
+<center><img src = "assets/v-6.jpg" width = 600></center>
 
 ### 2.3 实现并生产bit流文件
 
 &emsp;&emsp;在2.2节完成后会出现类似下图界面，直接点击Generate Bitstream：
 
-<center><img src = "../assets/v-7.jpg"></center>
+<center><img src = "assets/v-7.jpg"></center>
 
 &emsp;&emsp;弹出如下界面，点击Save：
 
-<center><img src = "../assets/v-8.jpg" width = 400></center>
+<center><img src = "assets/v-8.jpg" width = 400></center>
 
 &emsp;&emsp;如果有后续弹出界面，继续点击OK或Yes即可。这时就进入后续生产bit文件的流程了，此时Vivado界面里的synthesis design界面就可以关闭了。如果发现以下错误，则是因为路径太深，引用起来名字太长，降低工程目录深度即可：
 
-<center><img src = "../assets/v-9.jpg"></center>
+<center><img src = "assets/v-9.jpg"></center>
 
 ### 2.4 下载bit流和debug文件
 
 &emsp;&emsp;在完成2.3节后，会生成bit流文件和调试使用ltx文件。这里，打开Open Hardware Manager，连接好FPGA开发板后，选择Program device，如下图。自动加载了bit流文件和调试的ltx文件。选择Program，等待下载完成。
 
-<center><img src = "../assets/v-10.jpg" width = 600></center>
+<center><img src = "assets/v-10.jpg" width = 600></center>
 
 ### 2.5 下板观察
 
 &emsp;&emsp;在下载完成后，vivado界面如下，在线调试就是在hw_ila_1界面里进行的。
 
-<center><img src = "../assets/v-11.jpg"></center>
+<center><img src = "assets/v-11.jpg"></center>
 
 &emsp;&emsp;hw_ila_1界面主要分为3个界面，分别如下：
 
-<center><img src = "../assets/v-12.jpg"></center>
+<center><img src = "assets/v-12.jpg"></center>
 
 &emsp;&emsp;首先，我们需要在右下角区域设定触发条件。所谓触发条件，就是设定该条件满足时获取波形，比如我先设定触发条件是数码管寄存器到达0x0500_0005。在下图中，先点击“+”，在双击num_data。
 
-<center><img src = "../assets/v-13.jpg"></center>
+<center><img src = "assets/v-13.jpg"></center>
 
 &emsp;&emsp;之后会出现如下界面，设定好触发条件。
 
-<center><img src = "../assets/v-14.jpg"></center>
+<center><img src = "assets/v-14.jpg"></center>
 
 &emsp;&emsp;可以设定多个触发条件，比如，再加一个除法条件是写回使能是0xf，可以设定多个触发条件直接的关系，比如是任意一个满足、两个都是满足等等，如下图：
 
-<center><img src = "../assets/v-15.jpg" width = 600></center>
+<center><img src = "assets/v-15.jpg" width = 600></center>
 
 &emsp;&emsp;在左下角窗口，选择settings，可以设定Capture选项，可能经常用到的是Trigger position in window，用来设定触发条件满足的时刻在波形窗口的位置。比如，下图设定为500，当触发条件满足时，波形窗口的第500个clk的位置是该条件，言下之意，将触发条件满足前的500个clk的信号值也抓出来了，这样可以看到触发条件之前的电路行为。Refresh rate设定了波形窗口的刷新频率。
 
-<center><img src = "../assets/v-16.jpg" width = 600></center>
+<center><img src = "assets/v-16.jpg" width = 600></center>
 
 &emsp;&emsp;触发条件建立后，就可以启动波形抓取了，最关键的有三个触发按键，即下图圈出的3个按键：
 
@@ -125,11 +125,11 @@
 
 &emsp;&emsp;下图就是点击第三个按键得到的波形，因为是立即触发，所以num_data不是0x0500_0005，且有一条标注为“T”的红色，就是触发的时刻。由于触发时刻位于波形窗口的500 clk位置，所以红色的位置正好是500 clk处。
 
-<center><img src = "../assets/v-17.jpg"></center>
+<center><img src = "assets/v-17.jpg"></center>
 
 &emsp;&emsp;从上图也能看到，num_data是0x5c00_005c，表示一次测试已经完成了。所以这时候，点击第二个触发按键等待触发，会发现波形窗口没有反应。这是因为触发条件没有被满足，这时按下FPGA板上的复位键即可。结果如下图。红色圈出的就是触发条件：num_data==32’h5c00_005c && rf_wen==4’hf。
 
-<center><img src = "../assets/v-18.jpg"></center>
+<center><img src = "assets/v-18.jpg"></center>
 
 &emsp;&emsp;剩下的debug过程，就和仿真debug类似了，去观察波形。但在线调试时，你无法添加在2.1节未被添加debug mark的信号。在线调试过程中，可能需要不停的更换触发条件，不停的按复位键。
 

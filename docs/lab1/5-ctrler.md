@@ -37,11 +37,11 @@
 &emsp;&emsp;在上一节“数据通路设计”中，我们通过分析和综合，由指令级别的数据通路逐步构建出整个CPU的数据通路。现在，我们需要在表4-1的基础上进行扩展 —— 在“综合”的下方新增“操作选择信号”和“多路选择信号”两行；然后分析数据通路，得出每个功能部件所需的控制信号，并填入表中，如表5-2所示。
 
 <center>表5-2 扩展数据通路表，添加控制信号（示例）</center>
-<center><img src = "../assets/t5-2.png"></center>
+<center><img src = "assets/t5-2.png"></center>
 
 &emsp;&emsp;接下来，把控制单元和控制信号添加到数据通路图中，即可得到形如图5-1的单周期CPU数据通路图。控制单元的输入信号是指令的操作码、功能码，输出信号则是表5-2列出的操作选择信号和多路选择信号。
 
-<center><img src = "../assets/5-1.png" width = 650></center>
+<center><img src = "assets/5-1.png" width = 650></center>
 <center>图5-1 8条指令的完整数据通路图 (示例)</center>
 
 
@@ -53,7 +53,7 @@
 &emsp;&emsp;根据数据通路表及指令功能，填写形如表5-3所示的控制信号取值表。例如，`addi`指令顺序执行，故令`npc_op`为`PC4`，表示`addi`执行后PC的值要加4，从而实现顺序执行；此外，`addi`指令需把加法运算结果写回到目标寄存器，因此令`rf_we`为`1`，表示指令需要写回；令`rf_wsel`为`WB_ALU`，表示写回的数据来源于ALU的运算结果；令`alu_op`为`ADD`，表示`addi`指令需要ALU完成加法运算，等等。
 
 <center>表5-3 控制信号取值表 (示例)</center>
-<center><img src = "../assets/t5-3.png" width = 650></center>
+<center><img src = "assets/t5-3.png" width = 650></center>
 
 !!! tip "保证良好的可读性"
     &emsp;&emsp;在表5-3中填写控制信号取值时，尽量采用诸如`PC4`、`ADD`等可读性较强的符号表达方式。实现时，只需把表格内的符号用宏定义表示即可。
