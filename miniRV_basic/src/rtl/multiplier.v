@@ -14,7 +14,7 @@ module multiplier #(
     output wire             busy    // 乘法器是否正在计算
 );
 
-    localparam CNT_MAX = WIDTH / 2 - 1;
+    localparam CNT_MAX = (WIDTH + 1) / 2 - 1;
     localparam CNT_WID = $clog2(CNT_MAX + 1);
     localparam O_WID = 2 * WIDTH;
 
@@ -26,13 +26,14 @@ module multiplier #(
     reg  [1:0] state;
     reg  [1:0] next_state;
 
-    // TODO
-
     reg  [O_WID-1:0] partial;
+    reg  [WIDTH-1:0] multiplicand;
     reg  [WIDTH:0] booth_code;
     reg  [CNT_WID-1:0] cnt;
 
-    wire [O_WID-1:0] x_ext = {{WIDTH{x[WIDTH-1]}}, x};
+    // x/y are only valid during the one-cycle start pulse.  Latch both
+    // operands so the iterative calculation is independent of later inputs.
+    wire [O_WID-1:0] x_ext = {{WIDTH{multiplicand[WIDTH-1]}}, multiplicand};
     wire [O_WID-1:0] x2_ext = x_ext << 1;
     wire [O_WID-1:0] neg_x = ~x_ext + 1;
     wire [O_WID-1:0] neg_x2 = ~x2_ext + 1;
@@ -63,6 +64,7 @@ module multiplier #(
         if (rst) begin
             state <= IDLE;
             partial <= 0;
+            multiplicand <= 0;
             booth_code <= 0;
             cnt <= 0;
             z <= 0;
@@ -73,6 +75,7 @@ module multiplier #(
                 IDLE: begin
                     if (start) begin
                         partial <= 0;
+                        multiplicand <= x;
                         booth_code <= {y, 1'b0};  // 末尾补0
                         cnt <= 0;
                     end
