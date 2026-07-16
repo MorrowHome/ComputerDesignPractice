@@ -14,6 +14,7 @@
 `define NPC_PC4     2'b00
 `define NPC_BRA     2'b10
 `define NPC_JMP     2'b11
+`define NPC_JLR     2'b01
     
 `define EXT_I       3'b000
 `define EXT_B       3'b010
