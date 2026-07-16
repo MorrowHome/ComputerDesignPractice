@@ -27,41 +27,86 @@ module Controller (
     wire BNE   = (opcode == 7'b1100011) && (funct3 == 3'b001);
     wire LUI   = (opcode == 7'b0110111);
     wire JAL   = (opcode == 7'b1101111);
+
+    // B group: RV32I integer/branch instructions
+    wire SLT   = (opcode == 7'b0110011) && (funct3 == 3'b010) && (funct7 == 7'b0000000);
+    wire SLTI  = (opcode == 7'b0010011) && (funct3 == 3'b010);
+    wire SLTU  = (opcode == 7'b0110011) && (funct3 == 3'b011) && (funct7 == 7'b0000000);
+    wire SLTIU = (opcode == 7'b0010011) && (funct3 == 3'b011);
+    wire OR_   = (opcode == 7'b0110011) && (funct3 == 3'b110) && (funct7 == 7'b0000000);
+    wire AND_  = (opcode == 7'b0110011) && (funct3 == 3'b111) && (funct7 == 7'b0000000);
+    wire ANDI  = (opcode == 7'b0010011) && (funct3 == 3'b111);
+    wire BLT   = (opcode == 7'b1100011) && (funct3 == 3'b100);
+    wire BGE   = (opcode == 7'b1100011) && (funct3 == 3'b101);
+    wire BLTU  = (opcode == 7'b1100011) && (funct3 == 3'b110);
+    wire BGEU  = (opcode == 7'b1100011) && (funct3 == 3'b111);
+
+    // B group: RV32M instructions
+    wire MUL   = (opcode == 7'b0110011) && (funct3 == 3'b000) && (funct7 == 7'b0000001);
+    wire MULH  = (opcode == 7'b0110011) && (funct3 == 3'b001) && (funct7 == 7'b0000001);
+    wire MULHU = (opcode == 7'b0110011) && (funct3 == 3'b011) && (funct7 == 7'b0000001);
+    wire DIV   = (opcode == 7'b0110011) && (funct3 == 3'b100) && (funct7 == 7'b0000001);
+    wire DIVU  = (opcode == 7'b0110011) && (funct3 == 3'b101) && (funct7 == 7'b0000001);
+    wire REM   = (opcode == 7'b0110011) && (funct3 == 3'b110) && (funct7 == 7'b0000001);
+    wire REMU  = (opcode == 7'b0110011) && (funct3 == 3'b111) && (funct7 == 7'b0000001);
+
+    wire B_ALU_REG = SLT | SLTU | OR_ | AND_ |
+                     MUL | MULH | MULHU | DIV | DIVU | REM | REMU;
+    wire B_ALU_IMM = SLTI | SLTIU | ANDI;
+    wire B_BRANCH  = BLT | BGE | BLTU | BGEU;
+    wire B_MUL     = MUL | MULH | MULHU;
+    wire B_DIV     = DIV | DIVU | REM | REMU;
  
     // npc_op
-    wire NPC_OP_BRA = BEQ | BNE;
+    wire NPC_OP_BRA = BEQ | BNE | B_BRANCH;
     wire NPC_OP_JMP = JAL;
     wire NPC_OP_PC4 = !NPC_OP_BRA & !NPC_OP_JMP;
     
     // rf_we
-    wire RF_OP_WE = ADDI | ORI | SLLI | LW | LUI | JAL;
+    wire RF_OP_WE = ADDI | ORI | SLLI | LW | LUI | JAL |
+                    B_ALU_REG | B_ALU_IMM;
     
     // rf_wsel
-    wire WB_OP_ALU = ADDI | ORI | SLLI;
+    wire WB_OP_ALU = ADDI | ORI | SLLI | B_ALU_REG | B_ALU_IMM;
     wire WB_OP_RAM = LW;
     wire WB_OP_PC4 = JAL;
     wire WB_OP_EXT = LUI;
     
     // sext_op
-    wire EXT_OP_I = ADDI | ORI | SLLI | LW;
-    wire EXT_OP_B = BEQ | BNE;
+    wire EXT_OP_I = ADDI | ORI | SLLI | LW | B_ALU_IMM;
+    wire EXT_OP_B = BEQ | BNE | B_BRANCH;
     wire EXT_OP_U = LUI;
     wire EXT_OP_J = JAL;
     
     // alu_op
     wire ALU_OP_ADD   = ADDI | LW;
-    wire ALU_OP_OR    = ORI;
+    wire ALU_OP_OR    = ORI | OR_;
     wire ALU_OP_SLL   = SLLI;
     wire ALU_OP_EQ    = BEQ;
     wire ALU_OP_NE    = BNE;
+    wire ALU_OP_AND   = AND_ | ANDI;
+    wire ALU_OP_SLT   = SLT | SLTI;
+    wire ALU_OP_SLTU  = SLTU | SLTIU;
+    wire ALU_OP_LT    = BLT;
+    wire ALU_OP_GE    = BGE;
+    wire ALU_OP_LTU   = BLTU;
+    wire ALU_OP_GEU   = BGEU;
+    wire ALU_OP_MUL   = MUL;
+    wire ALU_OP_MULH  = MULH;
+    wire ALU_OP_MULHU = MULHU;
+    wire ALU_OP_DIV   = DIV;
+    wire ALU_OP_DIVU  = DIVU;
+    wire ALU_OP_REM   = REM;
+    wire ALU_OP_REMU  = REMU;
     
     // alua_sel
-    wire ALU_A_SEL_RS1 = ADDI | ORI | SLLI | LW | BEQ | BNE | JAL;
+    wire ALU_A_SEL_RS1 = ADDI | ORI | SLLI | LW | BEQ | BNE | JAL |
+                         B_ALU_REG | B_ALU_IMM | B_BRANCH;
     wire ALU_A_SEL_PC  = 1'b0;
                         
     // alub_sel
-    wire ALU_B_SEL_RS2 = BEQ | BNE;
-    wire ALU_B_SEL_EXT = ADDI | ORI | SLLI | LW | JAL;
+    wire ALU_B_SEL_RS2 = BEQ | BNE | B_ALU_REG | B_BRANCH;
+    wire ALU_B_SEL_EXT = ADDI | ORI | SLLI | LW | JAL | B_ALU_IMM;
         
     // ram_r_op
     wire RAM_EXT_B  = 1'b0;
@@ -93,9 +138,23 @@ module Controller (
                    
     assign alu_op = {5{ALU_OP_ADD  }} & `ALU_ADD
                   | {5{ALU_OP_OR   }} & `ALU_OR
+                  | {5{ALU_OP_AND  }} & `ALU_AND
                   | {5{ALU_OP_SLL  }} & `ALU_SLL
+                  | {5{ALU_OP_SLT  }} & `ALU_SLT
+                  | {5{ALU_OP_SLTU }} & `ALU_SLTU
                   | {5{ALU_OP_EQ   }} & `ALU_EQ
-                  | {5{ALU_OP_NE   }} & `ALU_NE;
+                  | {5{ALU_OP_NE   }} & `ALU_NE
+                  | {5{ALU_OP_LT   }} & `ALU_LT
+                  | {5{ALU_OP_GE   }} & `ALU_GE
+                  | {5{ALU_OP_LTU  }} & `ALU_LTU
+                  | {5{ALU_OP_GEU  }} & `ALU_GEU
+                  | {5{ALU_OP_MUL  }} & `ALU_MUL
+                  | {5{ALU_OP_MULH }} & `ALU_MULH
+                  | {5{ALU_OP_MULHU}} & `ALU_MULHU
+                  | {5{ALU_OP_DIV  }} & `ALU_DIV
+                  | {5{ALU_OP_DIVU }} & `ALU_DIVU
+                  | {5{ALU_OP_REM  }} & `ALU_REM
+                  | {5{ALU_OP_REMU }} & `ALU_REMU;
 
     assign alua_sel = ALU_A_SEL_PC & `ALU_A_PC | ALU_A_SEL_RS1 & `ALU_A_RS1;
 
@@ -111,7 +170,7 @@ module Controller (
                     | {4{RAM_W_H}} & `RAM_WE_H
                     | {4{RAM_W_W}} & `RAM_WE_W;
 
-    assign is_mul = 1'b0;
-    assign is_div = 1'b0;
+    assign is_mul = B_MUL;
+    assign is_div = B_DIV;
 
 endmodule
