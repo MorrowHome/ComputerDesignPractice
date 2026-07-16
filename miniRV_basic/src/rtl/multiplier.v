@@ -10,13 +10,13 @@ module multiplier #(
     input  wire [WIDTH-1:0] x,      // 31:0
     input  wire [WIDTH-1:0] y,      // 31:0
     input  wire             start,  // 乘法器开始计算
-    output reg  [O_WID-1:0] z,      // 63:0
+    output reg  [(2*WIDTH)-1:0] z,  // 63:0
     output wire             busy    // 乘法器是否正在计算
 );
 
-    localparam O_WID = 2 * WIDTH;
-    localparam CNT_WID = $clog2(CNT_MAX + 1);
     localparam CNT_MAX = WIDTH / 2 - 1;
+    localparam CNT_WID = $clog2(CNT_MAX + 1);
+    localparam O_WID = 2 * WIDTH;
 
     // states
     localparam IDLE = 2'b00;

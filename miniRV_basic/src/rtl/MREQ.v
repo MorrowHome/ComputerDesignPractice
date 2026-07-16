@@ -27,12 +27,21 @@ module MREQ (
 
         case (ram_wop)
             `RAM_WE_B: begin                            // sb
-                // TODO: 根据字节偏移量offset，分别使用ram_wop、ram_wdata产生da_wen、da_wdata
-                
+                case (offset)
+                    2'b00: begin da_wen = 4'b0001; da_wdata = {24'h0, ram_wdata[7:0]}; end
+                    2'b01: begin da_wen = 4'b0010; da_wdata = {16'h0, ram_wdata[7:0], 8'h0}; end
+                    2'b10: begin da_wen = 4'b0100; da_wdata = {8'h0, ram_wdata[7:0], 16'h0}; end
+                    2'b11: begin da_wen = 4'b1000; da_wdata = {ram_wdata[7:0], 24'h0}; end
+                endcase
             end
             `RAM_WE_H: begin                            // sh
-                // TODO: 根据16位半节偏移量offset[1]，分别使用ram_wop、ram_wdata产生da_wen、da_wdata
-                
+                if (!offset[1]) begin
+                    da_wen   = 4'b0011;
+                    da_wdata = {16'h0, ram_wdata[15:0]};
+                end else begin
+                    da_wen   = 4'b1100;
+                    da_wdata = {ram_wdata[15:0], 16'h0};
+                end
             end
             `RAM_WE_W:                                  // sw
                 if (offset == 2'h0) begin
@@ -45,9 +54,10 @@ module MREQ (
     always @(*) begin
         if (ram_rop != `RAM_EXT_N) begin
             case (ram_rop)
-                // TODO: 根据访存指令类型，判断偏移量offset是否满足对齐条件（字节对齐、半字对齐），
-                //       只有在对齐时才能访存
-                
+                `RAM_EXT_B, `RAM_EXT_BU:
+                    da_ren = 4'hF;                         // byte: any offset
+                `RAM_EXT_H, `RAM_EXT_HU:
+                    da_ren = offset[0] ? 4'h0 : 4'hF;      // halfword aligned
                 default    : da_ren = (offset == 2'h0) ? 4'hF : 4'h0;                       // lw
             endcase
         end else
