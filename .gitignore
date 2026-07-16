@@ -25,3 +25,5 @@ miniRV.hw/
 *.runs/
 *.sim/
 *.hw/
+
+__pycache__/
