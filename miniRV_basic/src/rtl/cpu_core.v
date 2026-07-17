@@ -198,7 +198,7 @@ module cpu_core(
     MEXT U_MEM_EXT (
         .op             (ram_rop_r),
         .din            (daccess_rdata),
-        .byte_offs      (alu_c_r[1:0]),
+        .byte_offs      (daccess_addr[1:0]),
         .ext            (ram_ext)
     );
 

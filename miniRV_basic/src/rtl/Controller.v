@@ -105,7 +105,7 @@ module Controller (
                     A_ALU_IMM | A_LOAD | JALR;
     wire EXT_OP_B = BEQ | BNE | B_BRANCH;
     wire EXT_OP_S = A_STORE;
-    wire EXT_OP_U = LUI;
+    wire EXT_OP_U = LUI | AUIPC;
     wire EXT_OP_J = JAL;
     
     // alu_op
@@ -140,7 +140,7 @@ module Controller (
     wire ALU_A_SEL_PC  = AUIPC;
                         
     // alub_sel
-    wire ALU_B_SEL_RS2 = BEQ | BNE | B_ALU_REG | B_BRANCH | A_ALU_REG | A_STORE;
+    wire ALU_B_SEL_RS2 = BEQ | BNE | B_ALU_REG | B_BRANCH | A_ALU_REG;
     wire ALU_B_SEL_EXT = ADDI | ORI | SLLI | LW | JAL | B_ALU_IMM |
                          A_ALU_IMM | AUIPC | A_LOAD | JALR;
         
