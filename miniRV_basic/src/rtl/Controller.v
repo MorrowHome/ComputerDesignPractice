@@ -142,7 +142,7 @@ module Controller (
     // alub_sel
     wire ALU_B_SEL_RS2 = BEQ | BNE | B_ALU_REG | B_BRANCH | A_ALU_REG;
     wire ALU_B_SEL_EXT = ADDI | ORI | SLLI | LW | JAL | B_ALU_IMM |
-                         A_ALU_IMM | AUIPC | A_LOAD | JALR;
+                         A_ALU_IMM | AUIPC | A_LOAD | A_STORE | JALR;
         
     // ram_r_op
     wire RAM_EXT_B  = LB;

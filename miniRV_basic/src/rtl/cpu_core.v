@@ -198,12 +198,16 @@ module cpu_core(
     MEXT U_MEM_EXT (
         .op             (ram_rop_r),
         .din            (daccess_rdata),
-        .byte_offs      (daccess_addr[1:0]),
+        .byte_offs      (alu_c_r[1:0]),
         .ext            (ram_ext)
     );
 
-    always @(posedge cpu_clk) if (is_ld_st) alu_c_r   <= alu_c;
-    always @(posedge cpu_clk) if (is_ld_st) ram_rop_r <= ram_rop;
+    always @(posedge cpu_clk) begin
+        if (|da_ren || |da_wen) begin
+            alu_c_r   <= da_addr;
+            ram_rop_r <= ram_rop;
+        end
+    end
 
     // Interface to Bus
     always @(posedge cpu_clk or posedge cpu_rst) begin
