@@ -69,6 +69,7 @@ module cpu_core(
     wire [31:0] da_addr;
     wire [ 3:0] da_wen;
     wire [31:0] da_wdata;
+    reg  [31:0] daccess_trace_wdata;
     wire [31:0] ram_ext;
     wire        is_ld_st;
     reg         ld_st_flag;
@@ -91,6 +92,7 @@ module cpu_core(
         .pc         (pc),
         .offset     (ext),
         .br         (br),
+        .jlr_target (alu_c),
         .npc        (npc),
         .pc4        (pc4)
     );
@@ -189,7 +191,7 @@ module cpu_core(
         .da_addr    (da_addr),
 
         .ram_wop    (ram_wop),
-        .ram_wdata  (32'h0),
+        .ram_wdata  (rf_rd2),
         .da_wen     (da_wen),
         .da_wdata   (da_wdata)
     );
@@ -201,19 +203,26 @@ module cpu_core(
         .ext            (ram_ext)
     );
 
-    always @(posedge cpu_clk) if (is_ld_st) alu_c_r   <= alu_c;
-    always @(posedge cpu_clk) if (is_ld_st) ram_rop_r <= ram_rop;
+    always @(posedge cpu_clk) begin
+        if (|da_ren || |da_wen) begin
+            alu_c_r   <= da_addr;
+            ram_rop_r <= ram_rop;
+        end
+    end
 
     // Interface to Bus
     always @(posedge cpu_clk or posedge cpu_rst) begin
         if (cpu_rst) begin
             daccess_ren   <= 4'h0;
             daccess_wen   <= 4'h0;
+            daccess_trace_wdata <= 32'h0;
         end else begin
             daccess_ren   <= da_ren;
             daccess_addr  <= da_addr;
             daccess_wen   <= da_wen;
             daccess_wdata <= da_wdata;
+            if (|da_wen)
+                daccess_trace_wdata <= rf_rd2;
         end
     end
 
@@ -267,7 +276,7 @@ module cpu_core(
     assign debug_mem_pc    = pc;
     assign debug_mem_we    = daccess_wen;
     assign debug_mem_waddr = daccess_addr;
-    assign debug_mem_wdata = daccess_wdata;
+    assign debug_mem_wdata = daccess_wen ? daccess_trace_wdata : daccess_wdata;
 `endif
 
 endmodule
