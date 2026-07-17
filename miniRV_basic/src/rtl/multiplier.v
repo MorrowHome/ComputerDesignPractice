@@ -18,25 +18,18 @@ module multiplier #(
     localparam CNT_WID = $clog2(CNT_MAX + 1);
     localparam O_WID = 2 * WIDTH;
 
-    // states
-    localparam IDLE = 2'b00;
-    localparam CALC = 2'b01;
-    localparam DONE = 2'b10;
-
-    reg  [1:0] state;
-    reg  [1:0] next_state;
-
     reg  [O_WID-1:0] partial;
     reg  [WIDTH-1:0] multiplicand;
-    reg  [WIDTH:0] booth_code;
+    reg  [WIDTH:0]   booth_code;
     reg  [CNT_WID-1:0] cnt;
+    reg               busy_r;
 
     // x/y are only valid during the one-cycle start pulse.  Latch both
     // operands so the iterative calculation is independent of later inputs.
-    wire [O_WID-1:0] x_ext = {{WIDTH{multiplicand[WIDTH-1]}}, multiplicand};
-    wire [O_WID-1:0] x2_ext = x_ext << 1;
-    wire [O_WID-1:0] neg_x = ~x_ext + 1;
-    wire [O_WID-1:0] neg_x2 = ~x2_ext + 1;
+    wire [O_WID-1:0] x_ext   = {{WIDTH{multiplicand[WIDTH-1]}}, multiplicand};
+    wire [O_WID-1:0] x2_ext  = x_ext << 1;
+    wire [O_WID-1:0] neg_x   = ~x_ext + 1;
+    wire [O_WID-1:0] neg_x2  = ~x2_ext + 1;
 
     reg  [O_WID-1:0] addend;
     always @(*) begin
@@ -50,49 +43,31 @@ module multiplier #(
         endcase
     end
 
-    always @(*) begin
-        next_state = state;
-
-        case (state)
-            IDLE: if (start) next_state = CALC;
-            CALC: if (cnt == CNT_MAX) next_state = DONE;
-            DONE: next_state = IDLE;
-        endcase
-    end
-
     always @(posedge clk or posedge rst) begin
         if (rst) begin
-            state <= IDLE;
-            partial <= 0;
+            busy_r      <= 1'b0;
+            partial     <= 0;
             multiplicand <= 0;
-            booth_code <= 0;
-            cnt <= 0;
-            z <= 0;
-        end else begin
-            state <= next_state;
-
-            case (state)
-                IDLE: begin
-                    if (start) begin
-                        partial <= 0;
-                        multiplicand <= x;
-                        booth_code <= {y, 1'b0};  // 末尾补0
-                        cnt <= 0;
-                    end
-                end
-                
-                CALC: begin
-                    partial <= partial + (addend << (2 * cnt));
-                    booth_code <= {{2{booth_code[WIDTH]}}, booth_code[WIDTH:2]};
-                    cnt <= cnt + 1;
-                end
-
-                DONE: begin
-                    z <= partial;
-                end
-            endcase
+            booth_code  <= 0;
+            cnt         <= 0;
+            z           <= 0;
+        end else if (start && !busy_r) begin
+            partial     <= 0;
+            multiplicand <= x;
+            booth_code  <= {y, 1'b0};  // 末尾补0
+            cnt         <= 0;
+            busy_r      <= 1'b1;
+        end else if (busy_r) begin
+            if (cnt == CNT_MAX) begin
+                z      <= partial + (addend << (2 * cnt));
+                busy_r <= 1'b0;
+            end else begin
+                partial <= partial + (addend << (2 * cnt));
+            end
+            booth_code <= {{2{booth_code[WIDTH]}}, booth_code[WIDTH:2]};
+            cnt        <= cnt + 1'b1;
         end
     end
 
-    assign busy = state != IDLE;
+    assign busy = busy_r;
 endmodule
