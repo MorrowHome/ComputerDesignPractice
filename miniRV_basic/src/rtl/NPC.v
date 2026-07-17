@@ -5,6 +5,7 @@ module NPC (
     input  wire [31:0]  pc,
     input  wire [31:0]  offset,
     input  wire         br,
+    input  wire [31:0]  jlr_target,
     
     output reg  [31:0]  npc,
     output wire [31:0]  pc4
@@ -17,6 +18,7 @@ module NPC (
             `NPC_PC4: npc = pc4;
             `NPC_BRA: npc = br ? pc + offset : pc4;
             `NPC_JMP: npc = pc + offset;
+            `NPC_JLR: npc = {jlr_target[31:1], 1'b0};
             default:  npc = pc4;
         endcase
     end
