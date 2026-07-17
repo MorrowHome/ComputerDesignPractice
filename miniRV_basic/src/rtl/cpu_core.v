@@ -69,6 +69,7 @@ module cpu_core(
     wire [31:0] da_addr;
     wire [ 3:0] da_wen;
     wire [31:0] da_wdata;
+    reg  [31:0] daccess_trace_wdata;
     wire [31:0] ram_ext;
     wire        is_ld_st;
     reg         ld_st_flag;
@@ -214,11 +215,14 @@ module cpu_core(
         if (cpu_rst) begin
             daccess_ren   <= 4'h0;
             daccess_wen   <= 4'h0;
+            daccess_trace_wdata <= 32'h0;
         end else begin
             daccess_ren   <= da_ren;
             daccess_addr  <= da_addr;
             daccess_wen   <= da_wen;
             daccess_wdata <= da_wdata;
+            if (|da_wen)
+                daccess_trace_wdata <= rf_rd2;
         end
     end
 
@@ -272,7 +276,7 @@ module cpu_core(
     assign debug_mem_pc    = pc;
     assign debug_mem_we    = daccess_wen;
     assign debug_mem_waddr = daccess_addr;
-    assign debug_mem_wdata = daccess_wdata;
+    assign debug_mem_wdata = daccess_wen ? daccess_trace_wdata : daccess_wdata;
 `endif
 
 endmodule
