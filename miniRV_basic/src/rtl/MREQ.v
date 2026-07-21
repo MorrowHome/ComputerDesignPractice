@@ -35,13 +35,20 @@ module MREQ (
                 endcase
             end
             `RAM_WE_H: begin                            // sh
-                if (!offset[1]) begin
-                    da_wen   = 4'b0011;
-                    da_wdata = {16'h0, ram_wdata[15:0]};
-                end else begin
-                    da_wen   = 4'b1100;
-                    da_wdata = {ram_wdata[15:0], 16'h0};
-                end
+                case (offset)
+                    2'b00: begin
+                        da_wen   = 4'b0011;
+                        da_wdata = {16'h0, ram_wdata[15:0]};
+                    end
+                    2'b10: begin
+                        da_wen   = 4'b1100;
+                        da_wdata = {ram_wdata[15:0], 16'h0};
+                    end
+                    default: begin
+                        da_wen   = 4'h0;
+                        da_wdata = ram_wdata;
+                    end
+                endcase
             end
             `RAM_WE_W:                                  // sw
                 if (offset == 2'h0) begin
