@@ -24,12 +24,19 @@ module divider #(
 
     wire [WIDTH:0] shifted_remainder =
         {remainder[WIDTH-1:0], quotient[WIDTH-1]};
-    wire can_subtract = shifted_remainder >= {1'b0, divisor};
-    wire [WIDTH:0] next_remainder = can_subtract
-                                  ? shifted_remainder - {1'b0, divisor}
-                                  : shifted_remainder;
+
+    // Traditional restoring division: subtract first, then restore the
+    // partial remainder by adding the divisor back if the result is negative.
+    wire [WIDTH:0] trial_remainder =
+        shifted_remainder - {1'b0, divisor};
+    wire trial_negative = trial_remainder[WIDTH];
+    wire [WIDTH:0] restored_remainder =
+        trial_remainder + {1'b0, divisor};
+    wire [WIDTH:0] next_remainder = trial_negative
+                                  ? restored_remainder
+                                  : trial_remainder;
     wire [WIDTH-1:0] next_quotient =
-        {quotient[WIDTH-2:0], can_subtract};
+        {quotient[WIDTH-2:0], ~trial_negative};
 
     // Unsigned restoring division.  Signed division is built around this
     // module in ALU.v by taking operand magnitudes and restoring the signs.
