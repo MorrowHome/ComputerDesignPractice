@@ -81,7 +81,7 @@ module Controller (
     wire ALU_OP_SUB   = SUB;
     wire ALU_OP_XOR   = XOR_ | XORI;
     wire ALU_OP_OR    = ORI;
-    wire ALU_OP_SLL   = SLLI;
+    wire ALU_OP_SLL   = SLLI | SLL;
     wire ALU_OP_SRL   = SRL | SRLI;
     wire ALU_OP_SRA   = SRA | SRAI;
     wire ALU_OP_EQ    = BEQ;
