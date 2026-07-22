@@ -53,6 +53,8 @@ verilator --binary --timing -Wno-fatal -Isrc/rtl \
 
 打开 `miniRV.xpr` 即可看到新增 RTL。板级构建复用 `DRAM` IP，因此请把 C_TEST 或 CoreMark 生成的 `.coe` 文件载入 `DRAM`，重新生成 IP 输出文件，然后再综合、实现和生成比特流。UART 和时钟均按 50 MHz 配置；修改 CPU 时钟后，需要同步修改 `uart_io.v` 的 `CLK_FREQ` 参数及 CoreMark 的 `MHZ`。
 
-`software/soc_io.h` 提供 MMIO 和 UART/计时器访问函数，`software/io_test.c` 会把拨码值显示到 LED、把计时器显示到数码管，并通过串口进行字符回显。可将这两个文件复制到课程 C_TEST 工程中编译。
+`software/soc_io.h` 提供 MMIO 和 UART/计时器访问函数，`software/io_test.c` 会把拨码值显示到 LED、把计时器显示到数码管，并通过串口进行字符回显。
+
+课程提供的官方 `c_test_rv_stu.tar.gz` 已解包到 `software/c_test`，UART TODO 已按本 SoC 的寄存器状态位补完。请先把各测试中的 `20XXXXXXXX` 替换为本人学号，再在装有 `riscv32-unknown-elf-gcc` 的 Linux 环境执行对应的 `compile.sh`。详细说明见 `software/c_test/README_SOC.md`。
 
 下板前必须在装有 Vivado 的机器上完成综合实现，确认时序报告无违例，再使用 EGO1 实板验证 UART、拨码、LED 和数码管。
